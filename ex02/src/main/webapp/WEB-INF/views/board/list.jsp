@@ -32,7 +32,7 @@
 								</thead>
 								<c:forEach items="${list}" var="board">
 								<tr>
-									<td><c:out value="${board.bno}"></c:out></td>
+									<td ><c:out value="${board.bno}"></c:out></td>
 									<td><c:out value="${board.title}"></c:out></td>
 									<td><c:out value="${board.writer}"></c:out></td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}"/></td>
