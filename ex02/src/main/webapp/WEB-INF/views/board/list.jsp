@@ -43,6 +43,30 @@
 								</tr>
 								</c:forEach>
 							</table>
+							
+							<!-- paging -->
+							<div class="pull-right">
+							
+								<<form id="actionForm" action="/board/list" method="get">
+									<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}" />
+									<input type="hidden" name="amount" value="${pageMaker.cri.amount}" />
+								</form>
+								<ul class="pagination">
+									<c:if test="${pageMaker.prev}">
+										<li class="paginate_button previous"><a href="${pageMaker.startPage - 1 }"> Prev</a></li>
+									</c:if>
+									
+									<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+										<li class="paginate_button ${pageMaker.cri.pageNum == num ? "active" : "" }"><a href="${num}">${num}</a></li>
+									</c:forEach>
+									
+									<c:if test="${pageMaker.next }">
+										<li class="paginate_button next"><a href="${pageMaker.endPage + 1 }">Next</a></li>
+									</c:if>
+									
+								</ul>
+							</div>
+							
 							<!-- /.table-responsive -->
 							<div class="well">
 								<h4>DataTables Usage Information</h4>
@@ -394,6 +418,17 @@
 		$("#regBtn").on("click", function () {
 			self.location = "/board/register";
 		});
+		
+		var actionForm = $("#actionForm");
+		
+		$(".paginate_button a").on("click", function (e) {
+			e.preventDefault();
+			
+			console.log('click');
+			
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+			actionForm.submit();
+		})
 		
 	});
 	
