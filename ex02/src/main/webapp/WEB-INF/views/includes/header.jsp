@@ -57,7 +57,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+				<a class="navbar-brand" href="index.html">Springframework 를 활용한 mvc 패턴의 웹 페이지</a>
 			</div>
 			<!-- /.navbar-header -->
 
