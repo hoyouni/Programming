@@ -15,6 +15,9 @@
 			<div class="panel-heading">게시물 수정</div>
 			<div class="panel-body">
 			<form role="form" action="/board/modify" method="post">
+			<!-- pageNum 과 amount 정보를 파라미터로 보내기 위한 태그 -->
+			<input type="hidden" name="pageNum" value="<c:out value="${cri.pageNum }"/>" />
+			<input type="hidden" name="amount" value="<c:out value="${cri.amount }"/>" />
 				<div class="form-group">
 					<label>글 번호</label>
 					<input class="form-control" name="bno" value='<c:out value="${board.bno}"/>' readonly="readonly"/>
