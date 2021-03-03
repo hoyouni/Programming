@@ -4,19 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.BoardMapper">
 	
-	<select id="getList" resultType="org.zerock.domain.BoardVO">
-		SELECT * FROM TBL_BOARD WHERE BNO &gt; 0
-	</select>
-	
-	<select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
-		SELECT BNO, TITLE, CONTENT, WRITER, REGDATE, UPDATEDATE
-		FROM (
-			SELECT /*+ INDEX_dESC(TBL_BOARD PK_BOARD) */
-			ROWNUM RN, BNO, TITLE, CONTENT, WRITER, REGDATE, UPDATEDATE
-			FROM TBL_BOARD
-			<!--  WHERE ROWNUM &lt;= #{pageNum} * #{amount} -->
-			WHERE 
-			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 				<foreach item="type" collection="typeArr">
 					<trim prefix="OR">
 						<choose>
@@ -33,6 +22,21 @@
 					</trim>
 				</foreach>
 			</trim>
+	</sql>
+	
+	<select id="getList" resultType="org.zerock.domain.BoardVO">
+		SELECT * FROM TBL_BOARD WHERE BNO &gt; 0
+	</select>
+	
+	<select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
+		SELECT BNO, TITLE, CONTENT, WRITER, REGDATE, UPDATEDATE
+		FROM (
+			SELECT /*+ INDEX_dESC(TBL_BOARD PK_BOARD) */
+			ROWNUM RN, BNO, TITLE, CONTENT, WRITER, REGDATE, UPDATEDATE
+			FROM TBL_BOARD
+			<!--  WHERE ROWNUM &lt;= #{pageNum} * #{amount} -->
+			WHERE 
+			<include refid="criteria"></include>
 			ROWNUM &lt;= #{pageNum} * #{amount}
 		)
 		WHERE RN &gt; (#{pageNum} - 1) * #{amount}
@@ -71,7 +75,10 @@
 	</update>
 	
 	<select id="getTotalCount" resultType="int">
-		SELECT COUNT(*) FROM TBL_BOARD WHERE BNO > 0
+		SELECT COUNT(*) FROM TBL_BOARD 
+		WHERE 
+		<include refid="criteria"></include>
+		BNO &gt; 0
 	</select>
 	
 </mapper>  
