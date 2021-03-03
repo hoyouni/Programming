@@ -51,6 +51,10 @@
 		WHERE BNO = #{bno}
 	</update>
 	
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) FROM TBL_BOARD WHERE BNO > 0
+	</select>
+	
 </mapper>  
 
 

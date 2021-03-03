@@ -6,6 +6,8 @@ import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
 
 public interface BoardService {
+	public int getTotal(Criteria cri);
+	
 	public void register(BoardVO board);
 	
 	public BoardVO get(Long bno);
