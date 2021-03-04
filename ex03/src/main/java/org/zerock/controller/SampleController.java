@@ -44,7 +44,7 @@ public class SampleController {
 	@GetMapping(value = "/getMap")
 	public Map<String, SampleVO> getMap() {
 		Map<String, SampleVO> map = new HashMap<String, SampleVO>();
-		map.put("First", new SampleVO(111, "테스트4", "입니다"));
+		map.put("First", new SampleVO(111, "테스트4 ", "입니다"));
 		
 		return map;
 	}
