@@ -41,11 +41,77 @@
 		</div>
 	</div>
 </div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<!-- /.panel -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-comments fa-fw"></i> Reply
+				<button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">댓글 작성</button>
+			</div>
+			<!-- <div class="panel-heading">
+				<i class="fa fa-comments fa-fw"></i> Reply
+			</div> -->
+		</div>
+		
+		<!-- /.panel-heading -->
+		<div class="panel-body">
+			<ul class="chat">
+				<!-- start reply -->
+				<li class="left clearfix" data-rno='12'>
+					<div>
+						<div class="header">
+							<strong class="primary-font">user00</strong>
+							<small class="pull-right text-muted">2021-0101 18:18</samll>
+						</div>
+						<p>Good job!</p>
+					</div>
+				</li>
+				<!-- end reply -->
+			</ul>
+				<!-- ./ end ul -->
+		</div>
+		<!-- end /. panel .chat-panel -->
+	</div>
+	<!-- ./ end row -->
+</div>
+
 <%@ include file="../includes/footer.jsp" %>
 
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 
 <script>
+	
+	$(document).ready(function () {
+		var bnoValue = '<c:out value="${board.bno}"/>';
+		var replyUL = $(".chat");
+		
+		showList(1);
+		
+		function showList(page) {
+			replyService.getList({bno:bnoValue, page: page|| 1}, function (list) {
+				var str = "";
+				
+				if(list == null || list.length == 0) {
+					replyUL.html("");
+					return;
+				}
+				
+				for(var i = 0, len = list.length || 0; i < len; i++) {
+					str += "<li class='left clearfix' data-rno='"+list[i].rno+"'>";
+					str += "<div><div class='header'><strong class='primary-font'>" + list[i].replyer + "</strong>";
+					str += "<small class='pull-right text-muted'>" + replyService.displayTime(list[i].replyDate) + "</small></div>";
+					str += "<p>" + list[i].reply + "</p></div></li>";
+				}
+				
+				replyUL.html(str);
+			});
+		}
+		
+	});
+	
+	/*
 	console.log("===============");
 	console.log("JS TEST");
 	
@@ -54,6 +120,7 @@
 	replyService.get(10, function(data) {
 		console.log(data);
 	});
+	*/
 	
 	/*
 	replyService.update({
