@@ -51,13 +51,47 @@
 	
 	var bnoValue = '<c:out value="${board.bno}"/>';
 	
+	replyService.get(10, function(data) {
+		console.log(data);
+	});
+	
+	/*
+	replyService.update({
+		rno : 22,
+		bno : bnoValue,
+		reply : "Modified Reply..."
+	}, function(result) {
+		alert("success modified");
+	});
+	*/
+	
+	/*
+	replyService.remove(23, function(count) {
+		console.log(count);
+		if(count === "success") {
+			alert("REMOVED");
+		}
+	}, function(err) {
+		alert('ERROR...');
+	});
+	*/
+	
+	/*
+	replyService.getList({bno:bnoValue, page:1}, function(list) {
+		for(var i = 0, len = list.length||0; i < len; i++) {
+			console.log(list[i]);
+		}
+	});
+	*/
+	
+	/* 
 	replyService.add(
 			{reply:"JS Test", replyer:"tester", bno:bnoValue},
 			function(result) {
 				alert("RESULT : " + result);
 			}
 	);
-	
+	 */
 </script>
 
 <script type="text/javascript">
