@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>		
-<%@ include file="../includes/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ include file="../includes/header.jsp"%>
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">게시물 조회</h1>
@@ -15,27 +15,30 @@
 			<div class="panel-heading">게시물 조회</div>
 			<div class="panel-body">
 				<div class="form-group">
-					<label>글 번호</label>
-					<input class="form-control" name="bno" value='<c:out value="${board.bno}"/>' readonly="readonly"/>
-				</div>			
+					<label>글 번호</label> <input class="form-control" name="bno"
+						value='<c:out value="${board.bno}"/>' readonly="readonly" />
+				</div>
 				<div class="form-group">
-					<label>글 제목</label>
-					<input class="form-control" name="title"  value='<c:out value="${board.title}"/>' readonly="readonly"/>
+					<label>글 제목</label> <input class="form-control" name="title"
+						value='<c:out value="${board.title}"/>' readonly="readonly" />
 				</div>
 				<div class="form-group">
 					<label>내용</label>
-					<textarea class="form-control" name="content" rows="3" readonly="readonly"><c:out value="${board.content}"></c:out> </textarea>
+					<textarea class="form-control" name="content" rows="3"
+						readonly="readonly"><c:out value="${board.content}"></c:out> </textarea>
 				</div>
 				<div class="form-group">
-					<label>작성자</label>
-					<input class="form-control" name="writer"  value='<c:out value="${board.writer}"/>' readonly="readonly"/>
+					<label>작성자</label> <input class="form-control" name="writer"
+						value='<c:out value="${board.writer}"/>' readonly="readonly" />
 				</div>
-				<button data-oper='modify' class="btn btn-default" > 수정</button>
-				<button data-oper='list' class="btn btn-info" >목록</button>
+				<button data-oper='modify' class="btn btn-default">수정</button>
+				<button data-oper='list' class="btn btn-info">목록</button>
 				<form id="operForm" action="/board/modify" method="get">
-					<input type="hidden" id="bno" name="bno" value='<c:out value="${board.bno}"/> '>
-					<input type="hidden" name="pageNum" value="<c:out value="${cri.pageNum}"/>" >
-					<input type="hidden" name="amount" value="<c:out value="${cri.amount}"/>" >
+					<input type="hidden" id="bno" name="bno"
+						value='<c:out value="${board.bno}"/> '> <input
+						type="hidden" name="pageNum"
+						value="<c:out value="${cri.pageNum}"/>"> <input
+						type="hidden" name="amount" value="<c:out value="${cri.amount}"/>">
 				</form>
 			</div>
 		</div>
@@ -48,13 +51,14 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<i class="fa fa-comments fa-fw"></i> Reply
-				<button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">댓글 작성</button>
+				<button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">댓글
+					작성</button>
 			</div>
 			<!-- <div class="panel-heading">
 				<i class="fa fa-comments fa-fw"></i> Reply
 			</div> -->
 		</div>
-		
+
 		<!-- /.panel-heading -->
 		<div class="panel-body">
 			<ul class="chat">
@@ -62,22 +66,61 @@
 				<li class="left clearfix" data-rno='12'>
 					<div>
 						<div class="header">
-							<strong class="primary-font">user00</strong>
-							<small class="pull-right text-muted">2021-0101 18:18</samll>
+							<strong class="primary-font">user00</strong> <small
+								class="pull-right text-muted">2021-0101 18:18</samll>
 						</div>
 						<p>Good job!</p>
 					</div>
 				</li>
 				<!-- end reply -->
 			</ul>
-				<!-- ./ end ul -->
+			<!-- ./ end ul -->
 		</div>
 		<!-- end /. panel .chat-panel -->
 	</div>
 	<!-- ./ end row -->
 </div>
 
-<%@ include file="../includes/footer.jsp" %>
+<%@ include file="../includes/footer.jsp"%>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Reply Modal</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label>Reply</label>
+					<input class="form-control"  name="reply" value="New Reply!!!"/>
+				</div>
+				<div class="form-group">
+					<label>Replyer</label>
+					<input class="form-control"  name="replyer" value="replyer"/>
+				</div>
+				<div class="form-group">
+					<label>Reply Date</label>
+					<input class="form-control"  name="replyDate" value=""/>
+				</div>
+				
+			</div>
+			<div class="modal-footer">
+				<button id="modalModBtn" type="button" class="btn btn-warning">Modify</button>
+				<button id="modalRemoveBtn" type="button" class="btn btn-danger">Remove</button>
+				<button id="modalRegisterBtn" type="button" class="btn btn-primary">Register</button>
+				<button id="modalCloseBtn" type="button" class="btn btn-default">Close</button>
+				
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 
@@ -108,6 +151,78 @@
 				replyUL.html(str);
 			});
 		}
+		
+		var modal = $(".modal");
+		var modalInputReply = modal.find("input[name='reply']");
+		var modalInputReplyer = modal.find("input[name='replyer']");
+		var modalInputReplyDate = modal.find("input[name='replyDate']");
+		
+		var modalModBtn = $("#modalModBtn");
+		var modalRemoveBtn = $("#modalRemoveBtn");
+		var modalRegisterBtn = $("#modalRegisterBtn");
+		
+		$("#addReplyBtn").on("click", function (e) {
+			modal.find("input").val("");
+			modalInputReplyDate.closest("div").hide();
+			modal.find("button[id != 'modalCloseBtn']").hide();
+			
+			modalRegisterBtn.show();
+			
+			$(".modal").modal("show");
+		});
+		
+		$("#modalRegisterBtn").on("click", function (e) {
+			var reply = {
+					reply: modalInputReply.val(),
+					replyer: modalInputReplyer.val(),
+					bno: bnoValue
+			};
+			replyService.add(reply, function (result) {
+				alert(result);
+				modal.find("input").val();
+				modal.modal("hide");
+				
+				showList(1);
+			});
+		});
+		
+		$(".chat").on("click", "li", function (e) {
+			var rno = $(this).data("rno");
+			
+			replyService.get(rno, function (reply) {
+				modalInputReply.val(reply.reply);
+				modalInputReplyer.val(reply.replyer);
+				modalInputReplyDate.val(replyService.displayTime(reply.replyDate)).attr("readonly", "readonly");
+				modal.data("rno", reply.rno);
+				
+				modal.find("button[id != 'modalCloseBtn']").hide();
+				modalModBtn.show();
+				modalRemoveBtn.show();
+				
+				$(".modal").modal("show");
+			});
+			
+		});
+		
+		$("#modalModBtn").on("click", function (e) {
+			var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
+			
+			replyService.update(reply, function (result) {
+				alert(result);
+				modal.modal("hide");
+				showList(1);
+			});
+		});
+		
+		$("#modalRemoveBtn").on("click", function (e) {
+			var rno = modal.data("rno");
+			replyService.remove(rno, function (result) {
+				alert(result);
+				modal.modal("hide");
+				showList(1);
+			});
+			
+		});
 		
 	});
 	
